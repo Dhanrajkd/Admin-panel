@@ -1,0 +1,14 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.forget_pass{
+    font-size: 18px;
+    padding-top: 10px;
+}
+.forget_pass:hover{
+    color: red;
+    cursor: pointer;
+}
