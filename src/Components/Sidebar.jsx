@@ -7,11 +7,9 @@ import {
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import GroupsIcon from "@mui/icons-material/Group"
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { NavLink } from "react-router-dom";
 import logo from '../Logo/logo-png.png'
-import { Height } from "@mui/icons-material";
 import {Box} from "@mui/material";
 const drawerWidth = 260;
 const Sidebar = () => {

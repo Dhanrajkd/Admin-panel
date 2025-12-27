@@ -50,7 +50,7 @@ const Topbar = () => {
           </Typography>
 
           {/* Right */}
-          <Box display="flex" alignItems="center" gap={2}>
+          <Box display="flex" alignItems="center"  gap={2}>
             
             {/* Search */}
             <Box
