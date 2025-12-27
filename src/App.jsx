@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Box, Toolbar } from "@mui/material";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./Components/Sidebar";
 import Topbar  from '../src/Components/Topbar'
 import Dashboard from "./Pages/Dashboard";
 import Students from "./Pages/Students";
