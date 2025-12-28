@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   };
   const checkemail=async (email)=>{
       try {
-      let responce=await fetch("http://localhost:4000/check_email",{
+      let responce=await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/check_email",{
         method:'POST',
         headers:{
           accept:"application/json",
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   }
   const addnew_pass=async (email,password)=>{
       try{
-          let responce=await fetch("http://localhost:4000/new_password",{
+          let responce=await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/new_password",{
             method:"PATCH",
             headers:{
               accept:"application/json",
