@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [name,setname]=useState("")
   const login = async (email, password) => {
     try {
-      let responce=await fetch("http://localhost:4000/check_admin",{
+      let responce=await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/check_admin",{
         method:'POST',
         headers:{
           accept:"application/json",
