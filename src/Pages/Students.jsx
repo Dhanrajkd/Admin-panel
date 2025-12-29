@@ -47,7 +47,7 @@ const Students = () => {
     },[load])
     const fetchdata=async ()=>{
       try{
-          let responce= await fetch("http://localhost:4000/get_studentdata")
+          let responce= await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/get_studentdata")
           let data=await responce.json()
           console.log(data.data)
           setStudents(data.data)
@@ -64,7 +64,7 @@ const Students = () => {
     if (editId) {
      try{
       console.log(editId)
-      const responce =await fetch(`http://localhost:4000/edit_stu/${editId}`,{
+      const responce =await fetch(`https://admin-panel-backend-luhq.onrender.com/api/admin/edit_stu/${editId}`,{
         method:"PUT",
         headers:{
           accept:"application/json",
@@ -93,7 +93,7 @@ const Students = () => {
             data.append("email", formData.email);
             data.append("course", formData.course);
             data.append("image", formData.image);
-          const responce=await fetch("http://localhost:4000/addstudent",{
+          const responce=await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/addstudent",{
             method:"POST",
             body:data
           })
@@ -124,7 +124,7 @@ const Students = () => {
   };
   const handleDelete = async(id) => {
     try{
-      const responce=await fetch(`http://localhost:4000/stu_delete/${id}`,{
+      const responce=await fetch(`https://admin-panel-backend-luhq.onrender.com/stu_delete/${id}`,{
         method:"DELETE",
         headers:{
           "Content-Type": "application/json",
