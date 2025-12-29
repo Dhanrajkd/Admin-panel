@@ -46,7 +46,7 @@ const Employees = () => {
       fetchdata()
      },[load])
       const fetchdata=async ()=>{
-        const responce=await fetch("http://localhost:4000/get_empdata")
+        const responce=await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/get_empdata")
         const data=await responce.json()
         console.log(data.data)
         setEmployees(data.data)
@@ -59,7 +59,7 @@ const Employees = () => {
     if (editId) {
          try{
       console.log(editId)
-      const responce =await fetch(`http://localhost:4000/edit_emp/${editId}`,{
+      const responce =await fetch(`https://admin-panel-backend-luhq.onrender.com/api/admin/edit_emp/${editId}`,{
         method:"PUT",
         headers:{
           accept:"application/json",
@@ -90,7 +90,7 @@ const Employees = () => {
         data.append("Specilization",formData.Specilization)
         data.append("image",formData.image)
       try{
-          let responce=await fetch("http://localhost:4000/add_employee",{
+          let responce=await fetch("https://admin-panel-backend-luhq.onrender.com/api/admin/add_employee",{
             method:"POST",
             body:data
           })
@@ -122,7 +122,7 @@ const Employees = () => {
 
   const handleDelete = async (id) => {
       try{
-      const responce=await fetch(`http://localhost:4000/emp_delete/${id}`,{
+      const responce=await fetch(`https://admin-panel-backend-luhq.onrender.com/api/admin/emp_delete/${id}`,{
         method:"DELETE",
         headers:{
           "Content-Type": "application/json",
