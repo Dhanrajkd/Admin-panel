@@ -13,6 +13,7 @@ import {
    Box,
    DialogTitle
 } from "@mui/material"
+import Lognavbar from "./Lognavbar";
 const Login = () => {
   const { login } = useContext(AuthContext);
   const {checkemail}=useContext(AuthContext)
@@ -72,6 +73,8 @@ const Login = () => {
 
   }
   return (
+    <>
+    <Lognavbar/>
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh",width:"100vw" }}>
       <form onSubmit={handleSubmit} style={{ padding: "30px", border: "1px solid #ccc", borderRadius: "10px",width:"400px",height:"auto" }}>
         <h2 style={{paddingBottom:"10px"}}>Admin Login</h2>
@@ -137,6 +140,7 @@ const Login = () => {
          </DialogContent>
       </Dialog>
     </div>
+    </>
   );
 };
 export default Login;

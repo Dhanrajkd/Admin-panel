@@ -38,7 +38,7 @@ const Fees = () => {
     },[])
         const fetchdata=async ()=>{
             try{
-              const responce=await fetch("http://localhost:4000/get_fees")
+              const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_fees")
               const data=await responce.json()
               console.log(data.data)
               setPayments(data.data)
@@ -60,7 +60,7 @@ const Fees = () => {
        console.log(formData)
       try{
         console.log(formData)
-        let responce=await fetch("http://localhost:4000/add_fees",{
+        let responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/add_fees",{
           method:"POST",
           headers:{
             accept:"application/json",

@@ -53,7 +53,6 @@ filteredStudents.forEach(s => {
     courseCount[course] = 1;
   }
 });
-
 for (const [course, count] of Object.entries(courseCount)) {
   chartData.push({ course, students: count });
 }

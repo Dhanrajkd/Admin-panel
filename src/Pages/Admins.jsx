@@ -37,7 +37,7 @@ const Admins = () => {
   });
    useEffect(()=>{
         const fetchdata=async ()=>{
-          const responce=await fetch("http://localhost:4000/get_admin")
+          const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_admin")
           const data=await responce.json()
           console.log(data.data)
           setAdmins(data.data)
@@ -57,7 +57,7 @@ const Admins = () => {
     } else {
       console.log(formData)
       try{
-        let responce=await fetch("http://localhost:4000/add_admin",{
+        let responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/add_admin",{
           method:"POST",
           headers:{
             accept:"application/json",

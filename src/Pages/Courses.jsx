@@ -34,7 +34,7 @@ const Courses = () => {
   });
   useEffect(()=>{
           const fetchdata=async ()=>{
-            const responce=await fetch("http://localhost:4000/cource_data")
+            const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/cource_data")
             const data=await responce.json()
             console.log(data.data)
             setCourses(data.data)
@@ -55,7 +55,7 @@ const Courses = () => {
     } else {
      console.log(formData)
       try{
-        let responce=await fetch("http://localhost:4000/add_cource",{
+        let responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/add_cource",{
           method:"POST",
           headers:{
             accept:"application/json",

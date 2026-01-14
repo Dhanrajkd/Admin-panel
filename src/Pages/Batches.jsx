@@ -41,7 +41,7 @@ const Batches = () => {
   };
   useEffect(()=>{
           const fetchdata=async ()=>{
-            const responce=await fetch("http://localhost:4000/get_batch")
+            const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_batch")
             const data=await responce.json()
             console.log(data.data)
             setBatches(data.data)
@@ -58,7 +58,7 @@ const Batches = () => {
     } else {
        console.log(formData)
       try{
-        let responce=await fetch("http://localhost:4000/add_batch",{
+        let responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/add_batch",{
           method:"POST",
           headers:{
             accept:"application/json",

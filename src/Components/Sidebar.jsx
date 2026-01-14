@@ -40,6 +40,8 @@ const Sidebar = () => {
       <List sx={{ padding: "10px" }}>
         <ListItemButton
           component={NavLink}
+          to="/"
+          end
           sx={{
             borderRadius: "8px",
             marginBottom: "8px",

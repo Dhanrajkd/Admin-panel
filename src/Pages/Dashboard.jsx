@@ -11,7 +11,7 @@ const Dashboard = () => {
   },[month])
   useEffect(() => {
     const fetchdata=async (req,res)=>{
-        const responce= await fetch("http://localhost:4000/get_studentdata")
+        const responce= await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_studentdata")
         let data=await responce.json()
         setStudents(data.data)
         console.log(data.data)
@@ -21,7 +21,7 @@ const Dashboard = () => {
     useEffect(()=>{
       const fetchdata=async ()=>{
                   try{
-                    const responce=await fetch("http://localhost:4000/get_fees")
+                    const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_fees")
                     const data=await responce.json()
                     console.log(data.data)
                     setpayments(data.data)
