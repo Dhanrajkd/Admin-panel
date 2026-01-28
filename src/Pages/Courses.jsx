@@ -106,7 +106,6 @@ const Courses = () => {
         </Button>
       </Box>
 
-      {/* Table */}
       <Table>
         <TableHead>
           <TableRow>
@@ -155,7 +154,6 @@ const Courses = () => {
         </TableBody>
       </Table>
 
-      {/* Dialog */}
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
         <DialogTitle>
           {editId ? "Edit Course" : "Add Course"}

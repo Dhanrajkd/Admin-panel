@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [name,setname]=useState("")
   const login = async (email, password) => {
     try {
-      let responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/check_admin",{
+      let responce=await fetch("http://localhost:4000/api/admin/check_admin",{
         method:'POST',
         headers:{
           accept:"application/json",
@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
       })
       let responcedata= await responce.json()
       if(responcedata.success){
-        console.log("verify success")
+        localStorage.setItem("authtoken",responcedata.authtoken)
+        console.log(responcedata.authtoken)
         setname(responcedata.name)
         setIsLoggedIn(true)
       }

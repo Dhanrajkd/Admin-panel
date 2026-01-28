@@ -30,6 +30,7 @@ const Employees = () => {
   const [editId, setEditId] = useState(null);
   const [load,setload]=useState(true)
   const [search,setSearch]=useState('')
+  const [totalpages,settotalpages]=useState(0)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,15 +42,18 @@ const Employees = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const [page,setpage]=useState(1)
+  const [limit,setlimit]=useState(5)
   useEffect(()=>{
-      fetchdata()
-     },[load])
-      const fetchdata=async ()=>{
-        const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_empdata")
+      fetchdata(page)
+     },[page])
+      const fetchdata=async (pagenumber=1)=>{
+        const responce=await fetch(`https://admin-panel-backend-m7do.onrender.com/api/admin/get_empdata?page=${pagenumber}&limit=${limit}`)
         const data=await responce.json()
         console.log(data.data)
+        console.log(data.totalpages)
         setEmployees(data.data)
+        settotalpages(data.totalpages)
       }
     const addfile=(e)=>{
       const file=e.target.files[0]
@@ -96,7 +100,11 @@ const Employees = () => {
           })
           let responcedata=await responce.json()
           if(responcedata.success){
-            alert("Data added")
+            alert(responcedata.message)
+            fetchdata()
+          }
+          else{
+            alert(responcedata.message)
           }
       }
       catch(err){
@@ -147,11 +155,6 @@ const Employees = () => {
       emp.email.toLowerCase().includes(search.toLowerCase())
       return matchsearch
   })
-  const [page,setpage]=useState(0)
-  const maxpage=5
-  const paginatedemployees=filteredemployees.slice(
-    page *maxpage,page+maxpage
-  )
   return (
     <Paper sx={{p: 3, borderRadius: 3 }}>
        <Box display="flex" gap={2} mb={2}>
@@ -200,7 +203,7 @@ const Employees = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedemployees.map((emp) => (
+            {filteredemployees.map((emp) => (
               <TableRow key={emp.id} hover>
                 <TableCell>
                   <Typography fontWeight={600} fontSize={14}>
@@ -255,13 +258,15 @@ const Employees = () => {
           <Box display="flex" justifyContent="flex-end" gap={2}mt={2}>
             <Button
             variant="outlined"
-            onClick=""
+            onClick={()=>setpage((prev)=>prev-1)}
+            disabled={page===1}
             >
               Prev
             </Button>
             <Button
             variant="outlined"
-            onClick=""
+            onClick={()=>setpage((prev)=>prev+1)}
+            disabled={page===totalpages}
             >
               Next
             </Button>

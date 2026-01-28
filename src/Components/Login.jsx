@@ -75,7 +75,7 @@ const Login = () => {
   return (
     <>
     <Lognavbar/>
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh",width:"100vw" }}>
+    <div style={{ display: "flex",flexDirection:"column", justifyContent: "center", alignItems: "center", height: "100vh",width:"100vw" }}>
       <form onSubmit={handleSubmit} style={{ padding: "30px", border: "1px solid #ccc", borderRadius: "10px",width:"400px",height:"auto" }}>
         <h2 style={{paddingBottom:"10px"}}>Admin Login</h2>
         {error && <p style={{ color: "red" }}>{error}</p>}
@@ -139,6 +139,14 @@ const Login = () => {
            </Stack>
          </DialogContent>
       </Dialog>
+      <Box sx={{mt:2,gap:2}}>
+          <Typography sx={{color:"red"}}>
+            Email:demo@gmail.com
+          </Typography>
+           <Typography>
+            Password:12345678
+          </Typography>
+      </Box>
     </div>
     </>
   );

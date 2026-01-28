@@ -42,15 +42,30 @@ const Students = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const [students, setStudents] = useState([]);
+  const [page,setpage]=useState(1)
+  const [limit,setlimit]=useState(5)
+  const [totalPages,setTotalPages] = useState(1);
   useEffect(()=>{
-      fetchdata()
-    },[load])
-    const fetchdata=async ()=>{
+      fetchdata(page)
+    },[page])
+    const fetchdata=async (pageNumber = 1)=>{
+      const token=localStorage.getItem("authtoken")
+      console.log(pageNumber)
       try{
-          let responce= await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_studentdata")
+          let responce= await fetch(`https://admin-panel-backend-m7do.onrender.com/api/admin/get_studentdata?page=${pageNumber}&limit=${limit}`,{
+            method:"GET",
+            headers:{
+              accept:"application/json",
+              "Content-Type":"application/json",
+              Authorization:`Bearer ${token}`
+            }
+          })
           let data=await responce.json()
           console.log(data.data)
+          console.log(data.totalpages)
           setStudents(data.data)
+          setpage(data.page)
+          setTotalPages(data.totalpages)
       }
       catch(err){
         console.log(err)
@@ -93,14 +108,21 @@ const Students = () => {
             data.append("email", formData.email);
             data.append("course", formData.course);
             data.append("image", formData.image);
+            const token=localStorage.getItem("authtoken")
           const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/addstudent",{
             method:"POST",
+            headers:{
+              Authorization:`Bearer ${token}`
+            },
             body:data
           })
           let responcedata=await responce.json()
           if(responcedata.success){
-            alert("success")
+            alert(responcedata.message)
            fetchdata()
+          }
+          else{
+            alert(responcedata.message)
           }
       }
       catch(err){
@@ -124,10 +146,12 @@ const Students = () => {
   };
   const handleDelete = async(id) => {
     try{
+      const token=localStorage.getItem("authtoken")
       const responce=await fetch(`https://admin-panel-backend-m7do.onrender.com/api/admin/stu_delete/${id}`,{
         method:"DELETE",
         headers:{
           "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`
         }
       })
       let responcedata=await responce.json()
@@ -136,7 +160,7 @@ const Students = () => {
         fetchdata()
       }
       else{
-        alert("failed")
+        alert(responcedata.message)
       }
     }
     catch(err){
@@ -151,13 +175,6 @@ const Students = () => {
     const matchCourse = courseFilter ? s.course === courseFilter : true;
     return matchSearch && matchCourse;
   });
-   const [page, setPage] = useState(0);
-  const rowsPerPage = 5;
-  const paginatedStudents = filteredStudents.slice(
-  page * rowsPerPage,
-  page * rowsPerPage + rowsPerPage
-);
-
   return (
     <Paper sx={{ p: 3, borderRadius: 3 }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
@@ -215,7 +232,7 @@ const Students = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedStudents.map((s) => (
+            {filteredStudents.map((s) => (
               <TableRow key={s.id} hover>
                 <TableCell>
                  <Typography fontWeight={600} fontSize={14}>
@@ -264,13 +281,15 @@ const Students = () => {
       <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
           <Button
             variant="outlined"
-            onClick={() => setPage(page - 1)}
+            onClick={() => setpage(page - 1)}
+            disabled={page===1}
           >
             Prev
           </Button>
           <Button
             variant="outlined"
-            onClick={() => setPage(page + 1)}
+            onClick={() => setpage(page + 1)}
+            disabled={page===totalPages}
           >
             Next
           </Button>

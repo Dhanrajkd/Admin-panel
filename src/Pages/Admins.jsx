@@ -57,17 +57,18 @@ const Admins = () => {
     } else {
       console.log(formData)
       try{
+        const token=localStorage.getItem("authtoken")
         let responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/add_admin",{
           method:"POST",
           headers:{
-            accept:"application/json",
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            Authorization:`Bearer ${token}`
           },
           body:JSON.stringify(formData)
         })
           let responcedata=await responce.json()
           if(responcedata.success){
-            alert(responcedata.message)
+           alert(responcedata.message)
           }
           else{
             alert(responcedata.message)
@@ -93,9 +94,28 @@ const Admins = () => {
     setOpen(true);
   };
 
-  const handleDelete = (id) => {
-    setAdmins(admins.filter((a) => a.id !== id));
-  };
+  const handleDelete = async(id) => {
+    const token=localStorage.getItem("authtoken")
+    try{
+      const responce=await fetch(`https://admin-panel-backend-m7do.onrender.com/api/admin/deleteadmin/${id}`,{
+      method:"DELETE",
+      headers:{
+        'Content-Type':"application/json",
+        Authorization:`Bearer ${token}`
+      }
+    })
+      const responcedata=await responce.json()
+      if(responcedata.success){
+        alert(responcedata.message)
+      }
+      else{
+        alert(responcedata.message)
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
 
   const roleColor = (role) => {
     switch (role) {
@@ -164,7 +184,7 @@ const Admins = () => {
                   </IconButton>
                   <IconButton
                     color="error"
-                    onClick={() => handleDelete(admin.id)}
+                    onClick={(e) => handleDelete(admin._id)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -174,8 +194,6 @@ const Admins = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {/* Dialog */}
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="sm">
         <DialogTitle>
           {editId ? "Edit Admin" : "Add Admin"}
@@ -212,6 +230,7 @@ const Admins = () => {
               <MenuItem value="Super Admin">Super Admin</MenuItem>
               <MenuItem value="Manager">Manager</MenuItem>
               <MenuItem value="Staff Admin">Staff Admin</MenuItem>
+              <MenuItem value="Demo">Demo</MenuItem>
             </Select>
           </Stack>
         </DialogContent>
