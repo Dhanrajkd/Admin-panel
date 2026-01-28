@@ -11,17 +11,27 @@ const Dashboard = () => {
   },[month])
   useEffect(() => {
     const fetchdata=async (req,res)=>{
+         const token=localstorage.getitem("authtoken")
+      try{
         const responce= await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_studentdata")
         let data=await responce.json()
         setStudents(data.data)
         console.log(data.data)
       }
+      catch(err){
+        console.log(err)
+      }
+    }
       fetchdata()
     },[]);
+      
     useEffect(()=>{
       const fetchdata=async ()=>{
                   try{
-                    const responce=await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_fees")
+                   
+                    const responce=await fetch(`https://admin-panel-backend-m7do.onrender.com/api/admin/get_fees`,{
+
+                    })
                     const data=await responce.json()
                     console.log(data.data)
                     setpayments(data.data)
