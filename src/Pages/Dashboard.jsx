@@ -10,8 +10,7 @@ const Dashboard = () => {
     console.log(month)
   },[month])
   useEffect(() => {
-    const fetchdata=async (req,res)=>{
-         const token=localstorage.getitem("authtoken")
+    const fetchdata=async ()=>{
       try{
         const responce= await fetch("https://admin-panel-backend-m7do.onrender.com/api/admin/get_studentdata")
         let data=await responce.json()
